@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="dark light">
+    <meta name="keywords" content="easyweather, weather">
+    <meta name="description" content="Simple weather app">
+    <meta name="author" content="Ksawert_">
+    <link rel="icon" type="img/png" href="icon/icon.svg">
+    <title>easyweather</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+<main>
+    <header>
+        <h1>easyweather</h1>
+        <div class="btn-theme">
+            <i class="fa-solid fa-moon" id="btnIcon"></i>
+        </div>
+    </header>
+    <section class="weather-space" id="space">
+        <div class="card" id="addLocation">
+            <i class="fa-solid fa-plus"></i>
+            <h3>Add location</h3>
+        </div>
+    </section>
+
+
+    <section id="locationInputDiv">
+        <header>
+            <h3>Add location</h3>
+            <i class="fa-solid fa-x" id="cancelBtn"></i>
+        </header>
+        <input type="text" placeholder="np. New York" id="locationName">
+        <input type="submit" value="Add" id="addLocationBtn">
+    </section>
+</main>
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js" integrity="sha512-Eezs+g9Lq4TCCq0wae01s9PuNWzHYoCMkE97e2qdkYthpI0pzC3UGB03lgEHn2XM85hDOUF6qgqqszs+iXU4UA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="JS/sorting.js"></script>
+<script src="JS/app.js"></script>
+<script src="https://kit.fontawesome.com/ca3cc7f826.js" crossorigin="anonymous"></script>
+<script src="JS/theme.js"></script>
+
+
+</html>
