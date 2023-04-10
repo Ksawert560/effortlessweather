@@ -81,7 +81,7 @@ function createElement(name, description, icon, temp, humidity, feels_like, temp
     const starIcon = document.createElement('i')
     starIcon.className='fa-regular fa-star'
     starIcon.id=number;
-    important(starIcon, card)
+    important(starIcon, card, name, number)
     
     cardHeader.appendChild(locationName)
     cardHeaderIcons.appendChild(starIcon)
@@ -106,6 +106,7 @@ function createElement(name, description, icon, temp, humidity, feels_like, temp
     
     
     weatherCardSpace.appendChild(card)
+
     
 }
 
@@ -123,13 +124,22 @@ if(localStorage.getItem('locations')==null){
     localStorage.clear()
     locations=[];
     counter=0
+    locationsDel="false"
 }else{
     locations = JSON.parse(localStorage.getItem('locations'));
     locationsDel = localStorage.getItem('delete')
-    if(locationsDel==true){
-        counter=locations.length+1
-    }else counter=locations.length
 }
+
+if(locationsDel=="true"){
+    let helpVar = locations[locations.length-1][1]
+    counter=helpVar+1
+}else if(locationsDel=="med"){
+    counter=locations.length+1
+}
+else{
+    counter=locations.length
+}
+
 for(let i=0; i<locations.length; i++){
     fetchWeather(locations[i][0], locations[i][1])
 
@@ -141,21 +151,35 @@ function trash(icon){
         let target = 0
         for(let i=0; i<locations.length; i++){
             for(let j=0; j<locations[i].length; j++){
-                if(locations[i][1]==icon.id) target=i
+                if(locations[i][1]==icon.id){
+                    target=i
+                }
             }
         }
-        console.log(target)
         locations.splice(target, 1)
         localStorage.setItem('locations', JSON.stringify(locations))
-        locationsDel = true;
-        localStorage.setItem('delete', locationsDel);
+
+        if(locations.length>1){
+            locationsDel = true;
+            localStorage.setItem('delete', locationsDel);
+        }
+        else if(locations.length==1){
+            locationsDel = "med";
+            localStorage.setItem('delete', locationsDel);
+        }
+        else{
+            locationsDel = false;
+            localStorage.setItem('delete', locationsDel);
+        }
+        
         location.reload()
     })
 }
 
-function important(icon, card){
-    if(icon !== undefined && icon !== null){
-        if(locations[icon.id][2]==true){
+function important(icon, card, name, number){
+    let target = icon.id
+    for(let i=0; i<locations.length; i++){
+        if(locations[i][1]==target && locations[i][2]==true){
             icon.className='fa-solid fa-star'
             card.style.color='var(--background)'
             card.style.background = 'var(--accentColor)'
@@ -198,7 +222,12 @@ cancelBtn.addEventListener('click', function(){
     locationInputDiv.style.visibility= "hidden"
 })
 addBtn.addEventListener('click', function(){
-    weatherLocation.location = locationName.value
+    let name = locationName.value;
+    let firstLetter = name.charAt(0)
+    let firstLetterCap = firstLetter.toUpperCase()
+    let remainingLetters = name.slice(1).toLowerCase()
+    let word = firstLetterCap+remainingLetters
+    weatherLocation.location = word
     weatherLocation.id = counter
 
     locations.push(Object.values(weatherLocation));
@@ -209,3 +238,5 @@ addBtn.addEventListener('click', function(){
     counter++;
     location.reload()
 })
+console.log(locations)
+// localStorage.clear()
