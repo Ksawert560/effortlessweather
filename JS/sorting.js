@@ -17,7 +17,7 @@ new Sortable(dragArea, {
     */
     get: function(sortable){
       var order = localStorage.getItem(sortable.options.group.name);
-      console.log(order)
+
       return order ? order.split('|') : [];
 
     },
@@ -27,7 +27,7 @@ new Sortable(dragArea, {
     set: function(sortable){
       var order = sortable.toArray();
       localStorage.setItem(sortable.options.group.name, order.join('|'));
-      console.log(order)
+
     }
       
   },
