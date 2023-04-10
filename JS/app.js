@@ -238,5 +238,3 @@ addBtn.addEventListener('click', function(){
     counter++;
     location.reload()
 })
-console.log(locations)
-// localStorage.clear()
